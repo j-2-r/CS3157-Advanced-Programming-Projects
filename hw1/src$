@@ -1,0 +1,64 @@
+#!/bin/bash
+################################################################################
+# junk.sh
+################################################################################
+help_flag=0
+list_flag=0
+purge_flag=0
+
+
+help_display() {
+echo " Usage: junk.sh [-hlp] [list of files]
+     -h: Display help.
+     -l: List junked files.
+     -p: Purge all files.
+     [list of files] with no other arguments to junk those files."
+
+
+}
+
+list_display() {
+	ls -lAF ~/.junk
+
+}
+
+purge() {
+	echo "test"#FINISH
+
+}
+
+
+
+
+while getopts ":hlp" option; do
+    case "$option" in
+       h) help_flag=1
+          ;;
+       l) list_flag=1
+          ;;
+ 	 p) purge_flag=1 #spacing weird		  
+  	;;
+     	 ?) printf "Error: Unknown option '-%s'.\n" "$OPTARG" >&2
+          exit 1
+          ;;
+    esac
+done
+
+
+
+help_display #delete later
+
+echo $help_flag $list_flag $purge_flag #flag_test
+
+
+
+####### create the hidden .junk file##############
+if [ ! -a "~/.junk" ]; then #Syntax?;  test -e; do we need to use basename?
+        mkdir ~/.junk
+fi
+
+list_display
+
+
+
+
